@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_53c07461f56317b0dec147278f9cbcff {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-ant-path@1.1.2/dist/leaflet-ant-path.min.js"></script>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_53c07461f56317b0dec147278f9cbcff" ></div>
+        
+    
+<div style="position: fixed; bottom: 30px; left: 30px; width: 180px; background: white;
+            border:2px solid grey; z-index:9999; font-size:14px; padding: 10px;">
+<b>颜色说明：</b><br>
+<span style="color:#FF6B6B;">■ 第1天</span><br>
+<span style="color:#4ECDC4;">■ 第2天</span><br>
+<span style="color:#556270;">■ 第3天</span><br>
+<span style="color:#C7F464;">■ 第4天</span><br>
+<span style="color:#FFA07A;">■ 第5天</span><br>
+<span style="color:#A29BFE;">■ 第6天</span><br>
+</div>
+    
+<div id="sidebar" style="position: fixed; top: 50px; right: 30px; width: 330px; height: 520px;
+     overflow-y: auto; background-color: white; border: 2px solid lightgray; z-index: 9999;
+     box-shadow: 2px 2px 8px rgba(0,0,0,0.3); padding: 10px; font-family: sans-serif;">
+    <h4 style="margin-top:0;">🗓️ 行程总览 + 酒店推荐</h4>
+    <div><b>📅 第1天｜4月30日｜崇左报到</b><ul><li>19:00 崇左南站 到站</li></ul></div>
+    <div><b>📅 第2天｜5月1日｜德天瀑布</b><ul><li>08:00-12:00 德天瀑布 游玩</li></ul>
+    <b style="color:#27ae60;">🏨 推荐酒店：</b><br/>
+    ✔ <b>德天景区精品民宿</b><br/>💰 ¥360/晚 ｜ 📍紧邻景区西门，步行可达<br/>
+    ✔ <b>硕龙镇快捷酒店</b><br/>💰 ¥260/晚 ｜ 📍镇中心，餐饮便利<br/></div>
+    <div><b>📅 第3天｜5月2日｜明仕田园 - 靖西</b><ul>
+        <li>08:30-11:00 明仕田园 游玩</li>
+        <li>18:00-20:00 靖西市区 吃晚饭</li></ul>
+    <b style="color:#27ae60;">🏨 推荐酒店：</b><br/>
+    ✔ <b>靖西市中心商务酒店</b><br/>💰 ¥280/晚 ｜ 📍市区主干道，交通方便<br/>
+    ✔ <b>靖西近郊花园客栈</b><br/>💰 ¥320/晚 ｜ 📍环境安静，适合放松<br/></div>
+    <div><b>📅 第4天｜5月3日｜鹅泉日出 - 靖西</b><ul>
+        <li>06:00-10:00 鹅泉</li><li>18:00-20:00 靖西市区 吃晚饭</li></ul>
+    <b style="color:#27ae60;">🏨 推荐酒店：</b><br/>
+    ✔ <b>靖西精品民宿A</b><br/>💰 ¥300/晚 ｜ 📍适合早起前往鹅泉<br/>
+    ✔ <b>靖西老城区民宿</b><br/>💰 ¥250/晚 ｜ 📍生活便利，夜市丰富<br/></div>
+    <div><b>📅 第5天｜5月4日｜通灵峡谷 - 崇左</b><ul>
+        <li>08:30-10:00 通灵大峡谷 游玩</li><li>18:00-20:00 崇左市区 吃晚饭</li></ul>
+    <b style="color:#27ae60;">🏨 推荐酒店：</b><br/>
+    ✔ <b>崇左高铁站快捷酒店</b><br/>💰 ¥210/晚 ｜ 📍临近高铁站，适合返程<br/>
+    ✔ <b>崇左江景商务酒店</b><br/>💰 ¥340/晚 ｜ 📍江景房型，设施齐全<br/></div>
+    <div><b>📅 第6天｜5月5日｜返程</b><ul><li>14:00 崇左南站 返程</li></ul></div>
+</div>
+</body>
+<script>
+    
+    
+            var map_53c07461f56317b0dec147278f9cbcff = L.map(
+                "map_53c07461f56317b0dec147278f9cbcff",
+                {
+                    center: [22.85, 106.9],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 9,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_b548f7af985a829b0ad459675dc77dab = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_53c07461f56317b0dec147278f9cbcff);
+        
+    
+            var feature_group_5c37eae2078b46b295ce879687ae27e1 = L.featureGroup(
+                {}
+            ).addTo(map_53c07461f56317b0dec147278f9cbcff);
+        
+    
+            var marker_e8ff796ee3bcdcb4bc9c44af8e66e110 = L.marker(
+                [22.402, 107.365],
+                {}
+            ).addTo(feature_group_5c37eae2078b46b295ce879687ae27e1);
+        
+    
+            var icon_4239b1fe3399342321cb3ada8893a4ff = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_e8ff796ee3bcdcb4bc9c44af8e66e110.setIcon(icon_4239b1fe3399342321cb3ada8893a4ff);
+        
+    
+            marker_e8ff796ee3bcdcb4bc9c44af8e66e110.bindTooltip(
+                `<div>
+                     崇左南站｜到站
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var feature_group_a2f43de1206fed799c729771823d575d = L.featureGroup(
+                {}
+            ).addTo(map_53c07461f56317b0dec147278f9cbcff);
+        
+    
+            var marker_df9da67bbd7a28e48cf6cd05b6e53ecd = L.marker(
+                [22.853, 106.722],
+                {}
+            ).addTo(feature_group_a2f43de1206fed799c729771823d575d);
+        
+    
+            var icon_5231a87d4c3409b7a32163e4f09c23de = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_df9da67bbd7a28e48cf6cd05b6e53ecd.setIcon(icon_5231a87d4c3409b7a32163e4f09c23de);
+        
+    
+            marker_df9da67bbd7a28e48cf6cd05b6e53ecd.bindTooltip(
+                `<div>
+                     德天瀑布｜游玩
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            ant_path_d5e580d74ce36f90dacc54deedefc3d6 = L.polyline.antPath(
+              [[22.402, 107.365], [22.853, 106.722]],
+              {"bubblingMouseEvents": true, "color": "#7f8c8d", "dashArray": [20, 30], "dashOffset": null, "delay": 1000, "fill": false, "fillColor": "#7f8c8d", "fillOpacity": 0.2, "fillRule": "evenodd", "hardwareAcceleration": false, "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "paused": false, "pulseColor": "#FFFFFF", "reverse": false, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+        ).addTo(feature_group_a2f43de1206fed799c729771823d575d);
+        
+    
+            var marker_72b7b17d02cb9cf7de8965ee7b3c9da6 = L.marker(
+                [22.851, 106.721],
+                {}
+            ).addTo(feature_group_a2f43de1206fed799c729771823d575d);
+        
+    
+            var icon_2f45fe2e2a98da4df03fbb85d60c63f6 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_72b7b17d02cb9cf7de8965ee7b3c9da6.setIcon(icon_2f45fe2e2a98da4df03fbb85d60c63f6);
+        
+    
+            marker_72b7b17d02cb9cf7de8965ee7b3c9da6.bindTooltip(
+                `<div>
+                     德天景区精品民宿｜¥360/晚｜紧邻景区西门，步行可达
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_2db3faef3b53db2353f4dad1dd7f3f62 = L.marker(
+                [22.84, 106.73],
+                {}
+            ).addTo(feature_group_a2f43de1206fed799c729771823d575d);
+        
+    
+            var icon_368e229b97c1be008f2a905da690104e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_2db3faef3b53db2353f4dad1dd7f3f62.setIcon(icon_368e229b97c1be008f2a905da690104e);
+        
+    
+            marker_2db3faef3b53db2353f4dad1dd7f3f62.bindTooltip(
+                `<div>
+                     硕龙镇快捷酒店｜¥260/晚｜镇中心，餐饮便利
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var feature_group_eef8fe2c49d7acf7ab40c9203f72ed44 = L.featureGroup(
+                {}
+            ).addTo(map_53c07461f56317b0dec147278f9cbcff);
+        
+    
+            var marker_32972aa301f88a276aa7ccb18a19c159 = L.marker(
+                [22.845, 106.693],
+                {}
+            ).addTo(feature_group_eef8fe2c49d7acf7ab40c9203f72ed44);
+        
+    
+            var icon_cc708e50db043dd09af5ce6f58df3609 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_32972aa301f88a276aa7ccb18a19c159.setIcon(icon_cc708e50db043dd09af5ce6f58df3609);
+        
+    
+            marker_32972aa301f88a276aa7ccb18a19c159.bindTooltip(
+                `<div>
+                     明仕田园｜游玩
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            ant_path_3184f98879943a08b56bf0ace4141ee2 = L.polyline.antPath(
+              [[22.853, 106.722], [22.845, 106.693]],
+              {"bubblingMouseEvents": true, "color": "#7f8c8d", "dashArray": [20, 30], "dashOffset": null, "delay": 1000, "fill": false, "fillColor": "#7f8c8d", "fillOpacity": 0.2, "fillRule": "evenodd", "hardwareAcceleration": false, "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "paused": false, "pulseColor": "#FFFFFF", "reverse": false, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+        ).addTo(feature_group_eef8fe2c49d7acf7ab40c9203f72ed44);
+        
+    
+            var marker_5963fcfe9391463de8ec88b9685f374b = L.marker(
+                [23.138, 106.417],
+                {}
+            ).addTo(feature_group_eef8fe2c49d7acf7ab40c9203f72ed44);
+        
+    
+            var icon_cda67b0c50ae80740365eab939de5e57 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_5963fcfe9391463de8ec88b9685f374b.setIcon(icon_cda67b0c50ae80740365eab939de5e57);
+        
+    
+            marker_5963fcfe9391463de8ec88b9685f374b.bindTooltip(
+                `<div>
+                     靖西市区｜吃晚饭
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            ant_path_2bcf7d24e46a6f3203b660e9137a2742 = L.polyline.antPath(
+              [[22.845, 106.693], [23.138, 106.417]],
+              {"bubblingMouseEvents": true, "color": "#7f8c8d", "dashArray": [20, 30], "dashOffset": null, "delay": 1000, "fill": false, "fillColor": "#7f8c8d", "fillOpacity": 0.2, "fillRule": "evenodd", "hardwareAcceleration": false, "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "paused": false, "pulseColor": "#FFFFFF", "reverse": false, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+        ).addTo(feature_group_eef8fe2c49d7acf7ab40c9203f72ed44);
+        
+    
+            var marker_7dddaefc795b2355f06475c93ddc0beb = L.marker(
+                [23.137, 106.418],
+                {}
+            ).addTo(feature_group_eef8fe2c49d7acf7ab40c9203f72ed44);
+        
+    
+            var icon_15496539a674b5c5354f58444627fc56 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_7dddaefc795b2355f06475c93ddc0beb.setIcon(icon_15496539a674b5c5354f58444627fc56);
+        
+    
+            marker_7dddaefc795b2355f06475c93ddc0beb.bindTooltip(
+                `<div>
+                     靖西市中心商务酒店｜¥280/晚｜市区主干道，交通方便
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_8c758e4aa44a1da33d19ddf33d0c78f9 = L.marker(
+                [23.13, 106.405],
+                {}
+            ).addTo(feature_group_eef8fe2c49d7acf7ab40c9203f72ed44);
+        
+    
+            var icon_2e0fee49672a790b3797d245e88f8278 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_8c758e4aa44a1da33d19ddf33d0c78f9.setIcon(icon_2e0fee49672a790b3797d245e88f8278);
+        
+    
+            marker_8c758e4aa44a1da33d19ddf33d0c78f9.bindTooltip(
+                `<div>
+                     靖西近郊花园客栈｜¥320/晚｜环境安静，适合放松
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var feature_group_9397b238e3f2fdc3c3b540683deb7399 = L.featureGroup(
+                {}
+            ).addTo(map_53c07461f56317b0dec147278f9cbcff);
+        
+    
+            var marker_5a98d73ec069058158c3fdd54ec12363 = L.marker(
+                [23.11, 106.459],
+                {}
+            ).addTo(feature_group_9397b238e3f2fdc3c3b540683deb7399);
+        
+    
+            var icon_062b06fef4234108a04740d9591efc9a = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_5a98d73ec069058158c3fdd54ec12363.setIcon(icon_062b06fef4234108a04740d9591efc9a);
+        
+    
+            marker_5a98d73ec069058158c3fdd54ec12363.bindTooltip(
+                `<div>
+                     鹅泉｜日出
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            ant_path_366bf637d1d77e16afa0307252056e48 = L.polyline.antPath(
+              [[23.138, 106.417], [23.11, 106.459]],
+              {"bubblingMouseEvents": true, "color": "#7f8c8d", "dashArray": [20, 30], "dashOffset": null, "delay": 1000, "fill": false, "fillColor": "#7f8c8d", "fillOpacity": 0.2, "fillRule": "evenodd", "hardwareAcceleration": false, "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "paused": false, "pulseColor": "#FFFFFF", "reverse": false, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+        ).addTo(feature_group_9397b238e3f2fdc3c3b540683deb7399);
+        
+    
+            var marker_2ab448ef0e7229c9167453f3a3dda711 = L.marker(
+                [23.138, 106.417],
+                {}
+            ).addTo(feature_group_9397b238e3f2fdc3c3b540683deb7399);
+        
+    
+            var icon_f0080b2b4230150379da03e108da85a0 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_2ab448ef0e7229c9167453f3a3dda711.setIcon(icon_f0080b2b4230150379da03e108da85a0);
+        
+    
+            marker_2ab448ef0e7229c9167453f3a3dda711.bindTooltip(
+                `<div>
+                     靖西市区｜吃晚饭
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            ant_path_4f5b3e342782ebb19b9d0b667f87975c = L.polyline.antPath(
+              [[23.11, 106.459], [23.138, 106.417]],
+              {"bubblingMouseEvents": true, "color": "#7f8c8d", "dashArray": [20, 30], "dashOffset": null, "delay": 1000, "fill": false, "fillColor": "#7f8c8d", "fillOpacity": 0.2, "fillRule": "evenodd", "hardwareAcceleration": false, "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "paused": false, "pulseColor": "#FFFFFF", "reverse": false, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+        ).addTo(feature_group_9397b238e3f2fdc3c3b540683deb7399);
+        
+    
+            var marker_20253ee20c0dc04d35c63a52ee2e689f = L.marker(
+                [23.14, 106.42],
+                {}
+            ).addTo(feature_group_9397b238e3f2fdc3c3b540683deb7399);
+        
+    
+            var icon_fef70917b6108c06c9d19372ba5b0424 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_20253ee20c0dc04d35c63a52ee2e689f.setIcon(icon_fef70917b6108c06c9d19372ba5b0424);
+        
+    
+            marker_20253ee20c0dc04d35c63a52ee2e689f.bindTooltip(
+                `<div>
+                     靖西精品民宿A｜¥300/晚｜适合早起前往鹅泉
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_9a1f5af94f19a3b46648d55ad55e0e6a = L.marker(
+                [23.135, 106.41],
+                {}
+            ).addTo(feature_group_9397b238e3f2fdc3c3b540683deb7399);
+        
+    
+            var icon_e8753f1b37be47dcb0834bf72111e516 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_9a1f5af94f19a3b46648d55ad55e0e6a.setIcon(icon_e8753f1b37be47dcb0834bf72111e516);
+        
+    
+            marker_9a1f5af94f19a3b46648d55ad55e0e6a.bindTooltip(
+                `<div>
+                     靖西老城区民宿｜¥250/晚｜生活便利，夜市丰富
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var feature_group_cf15a3f54fce4b2e7e8def14a29d2aff = L.featureGroup(
+                {}
+            ).addTo(map_53c07461f56317b0dec147278f9cbcff);
+        
+    
+            var marker_d00b97ec12b8307ce0705cea3e9428cf = L.marker(
+                [23.165, 106.5],
+                {}
+            ).addTo(feature_group_cf15a3f54fce4b2e7e8def14a29d2aff);
+        
+    
+            var icon_88b93abe659cd05326b44d6f83187a01 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_d00b97ec12b8307ce0705cea3e9428cf.setIcon(icon_88b93abe659cd05326b44d6f83187a01);
+        
+    
+            marker_d00b97ec12b8307ce0705cea3e9428cf.bindTooltip(
+                `<div>
+                     通灵大峡谷｜游玩
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            ant_path_df71c9e6c018f3060c31fb3a1568814a = L.polyline.antPath(
+              [[23.138, 106.417], [23.165, 106.5]],
+              {"bubblingMouseEvents": true, "color": "#7f8c8d", "dashArray": [20, 30], "dashOffset": null, "delay": 1000, "fill": false, "fillColor": "#7f8c8d", "fillOpacity": 0.2, "fillRule": "evenodd", "hardwareAcceleration": false, "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "paused": false, "pulseColor": "#FFFFFF", "reverse": false, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+        ).addTo(feature_group_cf15a3f54fce4b2e7e8def14a29d2aff);
+        
+    
+            var marker_25f8ffaa071f8a211900813ac75b2e05 = L.marker(
+                [22.4, 107.37],
+                {}
+            ).addTo(feature_group_cf15a3f54fce4b2e7e8def14a29d2aff);
+        
+    
+            var icon_1840c865ca7760429a3c694ed73d8374 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_25f8ffaa071f8a211900813ac75b2e05.setIcon(icon_1840c865ca7760429a3c694ed73d8374);
+        
+    
+            marker_25f8ffaa071f8a211900813ac75b2e05.bindTooltip(
+                `<div>
+                     崇左市区｜吃晚饭
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            ant_path_b7a4aba97b5f9cf756c77044bd01fdc1 = L.polyline.antPath(
+              [[23.165, 106.5], [22.4, 107.37]],
+              {"bubblingMouseEvents": true, "color": "#7f8c8d", "dashArray": [20, 30], "dashOffset": null, "delay": 1000, "fill": false, "fillColor": "#7f8c8d", "fillOpacity": 0.2, "fillRule": "evenodd", "hardwareAcceleration": false, "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "paused": false, "pulseColor": "#FFFFFF", "reverse": false, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+        ).addTo(feature_group_cf15a3f54fce4b2e7e8def14a29d2aff);
+        
+    
+            var marker_7b3c49d61e653ba053b4b8ba0c9dab33 = L.marker(
+                [22.395, 107.368],
+                {}
+            ).addTo(feature_group_cf15a3f54fce4b2e7e8def14a29d2aff);
+        
+    
+            var icon_065ea116da0b626bb47f2bf7d2762d84 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_7b3c49d61e653ba053b4b8ba0c9dab33.setIcon(icon_065ea116da0b626bb47f2bf7d2762d84);
+        
+    
+            marker_7b3c49d61e653ba053b4b8ba0c9dab33.bindTooltip(
+                `<div>
+                     崇左高铁站快捷酒店｜¥210/晚｜临近高铁站，适合返程
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_337267913f8247747409bec430fdb8b4 = L.marker(
+                [22.405, 107.38],
+                {}
+            ).addTo(feature_group_cf15a3f54fce4b2e7e8def14a29d2aff);
+        
+    
+            var icon_cd97139466dc5e9b558a20c848cb261e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "home", "iconColor": "white", "markerColor": "green", "prefix": "glyphicon"}
+            );
+            marker_337267913f8247747409bec430fdb8b4.setIcon(icon_cd97139466dc5e9b558a20c848cb261e);
+        
+    
+            marker_337267913f8247747409bec430fdb8b4.bindTooltip(
+                `<div>
+                     崇左江景商务酒店｜¥340/晚｜江景房型，设施齐全
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var feature_group_5ecbe1d4a4c8635ac8341bc2722347f2 = L.featureGroup(
+                {}
+            ).addTo(map_53c07461f56317b0dec147278f9cbcff);
+        
+    
+            var marker_663642facf98befacd81182ae608ac49 = L.marker(
+                [22.402, 107.365],
+                {}
+            ).addTo(feature_group_5ecbe1d4a4c8635ac8341bc2722347f2);
+        
+    
+            var icon_09f5409729da69afabbb717d15ab5beb = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_663642facf98befacd81182ae608ac49.setIcon(icon_09f5409729da69afabbb717d15ab5beb);
+        
+    
+            marker_663642facf98befacd81182ae608ac49.bindTooltip(
+                `<div>
+                     崇左南站｜返程
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            ant_path_d19ed882c784dcf2f75a8e7bcdad9494 = L.polyline.antPath(
+              [[22.4, 107.37], [22.402, 107.365]],
+              {"bubblingMouseEvents": true, "color": "#7f8c8d", "dashArray": [20, 30], "dashOffset": null, "delay": 1000, "fill": false, "fillColor": "#7f8c8d", "fillOpacity": 0.2, "fillRule": "evenodd", "hardwareAcceleration": false, "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "paused": false, "pulseColor": "#FFFFFF", "reverse": false, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+        ).addTo(feature_group_5ecbe1d4a4c8635ac8341bc2722347f2);
+        
+    
+            var layer_control_9c74daba0f99a9f290510218780aff7e = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_b548f7af985a829b0ad459675dc77dab,
+                },
+                overlays :  {
+                    "\u7b2c1\u5929" : feature_group_5c37eae2078b46b295ce879687ae27e1,
+                    "\u7b2c2\u5929" : feature_group_a2f43de1206fed799c729771823d575d,
+                    "\u7b2c3\u5929" : feature_group_eef8fe2c49d7acf7ab40c9203f72ed44,
+                    "\u7b2c4\u5929" : feature_group_9397b238e3f2fdc3c3b540683deb7399,
+                    "\u7b2c5\u5929" : feature_group_cf15a3f54fce4b2e7e8def14a29d2aff,
+                    "\u7b2c6\u5929" : feature_group_5ecbe1d4a4c8635ac8341bc2722347f2,
+                },
+            };
+            L.control.layers(
+                layer_control_9c74daba0f99a9f290510218780aff7e.base_layers,
+                layer_control_9c74daba0f99a9f290510218780aff7e.overlays,
+                {"autoZIndex": true, "collapsed": false, "position": "topright"}
+            ).addTo(map_53c07461f56317b0dec147278f9cbcff);
+        
+</script>
+</html>
